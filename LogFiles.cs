@@ -6,24 +6,39 @@ using System.Threading.Tasks;
 
 namespace OOP_Lab6
 {
-    internal class LogFiles
+    public class LogFiles : IDisposable
     {
-        public static int Process(string fileName)
+        private StreamWriter noFile;
+        private StreamWriter badData;
+        private StreamWriter overflow;
+
+        public LogFiles()
         {
-            using StreamReader sr = new StreamReader(fileName);
-
-            string line1 = sr.ReadLine();
-            string line2 = sr.ReadLine();
-
-            int a = int.Parse(line1);
-            int b = int.Parse(line2);
-
-            checked
-            {
-                return a * b;
-            }
+            noFile = new StreamWriter("no_file.txt", false);
+            badData = new StreamWriter("bad_data.txt", false);
+            overflow = new StreamWriter("overflow.txt", false);
         }
 
+        public void WriteNoFile(string fileName)
+        {
+            noFile.WriteLine(fileName);
+        }
 
+        public void WriteBadData(string fileName)
+        {
+            badData.WriteLine(fileName);
+        }
+
+        public void WriteOverflow(string fileName)
+        {
+            overflow.WriteLine(fileName);
+        }
+
+        public void Dispose()
+        {
+            noFile?.Dispose();
+            badData?.Dispose();
+            overflow?.Dispose();
+        }
     }
 }
