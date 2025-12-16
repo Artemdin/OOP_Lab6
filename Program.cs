@@ -1,12 +1,14 @@
 ﻿using OOP_Lab6;
 using System;
-
+using System.Drawing;      
+using System.Windows.Forms;
 
 namespace OOP_Lab6
 {
 
     class Program
     {
+        [STAThread]
         static void Main()
         {
             LogFiles logs;
@@ -54,7 +56,13 @@ namespace OOP_Lab6
 
             logs.Dispose();
 
-            Console.WriteLine((double)sum / count);
+            Console.WriteLine($"Результат: {(double)sum / count}");
+          
+            Console.WriteLine("\nПочинаємо обробку зображень...");
+            ImageMirror.Run();
+            Console.WriteLine("Роботу завершено.");
+            Console.ReadKey();
+
         }
     }
 }
